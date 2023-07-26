@@ -48,3 +48,4 @@ def process_new_user():
     db.session.commit()
 
     return redirect('/users')
+
