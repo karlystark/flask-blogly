@@ -111,6 +111,10 @@ button:hover {
   transform: scale(1.1);
 }
 
+img {
+  transition: transform .4s ease-in-out;
+}
+
 img:hover {
   transform: scale(1.1) rotate(2deg);
   transition: .4s;
