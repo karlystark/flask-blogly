@@ -8,10 +8,14 @@ from models import db, connect_db, User
 
 
 app = Flask(__name__)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
     "DATABASE_URL", 'postgresql:///blogly')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
+
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+
 
 connect_db(app)
 
@@ -46,6 +50,9 @@ def process_new_user():
     first_name = request.form['firstname']
     last_name = request.form['lastname']
     image_url = request.form['imageurl']
+
+    if image_url == '':
+        image_url = None
 
     new_user = User(first_name=first_name,
                     last_name=last_name,
@@ -113,7 +120,6 @@ def delete_user_profile(user_id):
     """Deletes user from database on delete button click, redirects to
     user list page."""
 
-    """need click event on button """
     user = User.query.get(user_id)
 
     db.session.delete(user)

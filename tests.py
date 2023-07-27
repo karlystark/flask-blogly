@@ -55,6 +55,7 @@ class UserViewTestCase(TestCase):
         db.session.rollback()
 
     def test_list_users(self):
+        """Tests that user list HTML appears on screen and status code is 200"""
         with self.client as c:
             resp = c.get("/users")
             self.assertEqual(resp.status_code, 200)
@@ -62,8 +63,9 @@ class UserViewTestCase(TestCase):
             self.assertIn("test1_first", html)
             self.assertIn("test1_last", html)
 
+
     def test_new_users_form(self):
-        """ """
+        """Tests that new user form HTML appears on screen and status code is 200"""
         with self.client as c:
             resp = c.get('/users/new')
             self.assertEqual(resp.status_code, 200)
@@ -72,10 +74,28 @@ class UserViewTestCase(TestCase):
 
 
     def test_process_new_user(self):
-        """Tests for a redirect"""
+        """Tests redirect after new user form submit"""
         with self.client as c:
-            resp = c.post('/users/new', data = {'first_name': 'test1_first',
-                                               'last_name': 'test1_last',
-                                               'image_url': None})
+            resp = c.post('/users/new', data= {"firstname":"test1_first",
+                                                "lastname":"test1_last",
+                                                "imageurl": ''})
             self.assertEqual(resp.status_code, 302)
             self.assertEqual(resp.location, '/users')
+
+
+    def test_user_profile_page(self):
+        """Tests that correct user profile is displayed on page"""
+        with self.client as c:
+            resp = c.get(f'/users/{self.user_id}')
+            html = resp.get_data(as_text=True)
+            self.assertIn("test1_first", html)
+            self.assertEqual(resp.status_code, 200)
+
+
+    def test_user_edit_page(self):
+        """Tests that user edit page is displayed on page"""
+        with self.client as c:
+            resp = c.get(f'/users/{self.user_id}/edit')
+            html = resp.get_data(as_text=True)
+            self.assertIn("test1_last", html)
+            self.assertEqual(resp.status_code, 200)
