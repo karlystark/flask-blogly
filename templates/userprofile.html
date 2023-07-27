@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<img src='{{ user.image_url }}'
+alt-text="{{user.first_name}} {{user.last_name}} profile picture">
+
+<h1>{{ user.first_name }} {{ user.last_name }}</h1>
+
+<button class="edit_btn"
+onclick="location.href='/users/{{ user.id }}/edit'">Edit</button>
+
+<button class="delete_btn">Delete</button>
+
+{% endblock %}
