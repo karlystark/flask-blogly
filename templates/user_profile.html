@@ -14,6 +14,13 @@
       <button type="submit" class="delete_btn">Delete</button>
     </form>
   </div>
+
+  <ul>
+    {% for post in posts %}
+      <li><a href="/posts/{{ post_id }}">{{ post_title }}</a></li>
+    {% endfor %}
+  </ul>
+
 </div>
 </div>
 {% endblock %}

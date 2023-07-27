@@ -4,7 +4,7 @@
 <h1 class="edit_title"> Edit a User</h1>
 
 <div id="form_container">
-  <form action="/users/{{ user.user_id }}/edit" method="POST" class="edit_form">
+  <form action="/users/{{ user_id }}/edit" method="POST" class="edit_form">
     <label for="">First Name</label>
     <input type="text" name="firstname" value="{{ user.first_name }}">
 
@@ -16,6 +16,7 @@
 
 
     <button onclick="location.href='/users'">Cancel</button>
+
     <button type="submit">Save</button>
   </form>
 </div>
