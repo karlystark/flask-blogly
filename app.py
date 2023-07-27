@@ -68,6 +68,7 @@ def show_user_profile(user_id):
 
     return render_template('userprofile.html',
                            first_name = first_name,
+                           user_id = user_id,
                            last_name = last_name,
                            image_url = image_url)
 
@@ -82,6 +83,7 @@ def show_user_edit_page(user_id):
     image_url = user.image_url
 
     return render_template('usereditpage.html',
+                           user_id = user_id,
                            first_name = first_name,
                            last_name = last_name,
                            image_url = image_url)
@@ -106,14 +108,15 @@ def process_user_edits(user_id):
     return redirect('/users')
 
 
-@app.post('/users/<int:user_id>/edit')
+@app.post('/users/<int:user_id>/delete')
 def delete_user_profile(user_id):
     """Deletes user from database on delete button click, redirects to
     user list page."""
+
+    """need click event on button """
     user = User.query.get(user_id)
 
     db.session.delete(user)
-
     db.session.commit()
 
     return redirect('/users')

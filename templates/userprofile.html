@@ -2,14 +2,15 @@
 
 {% block content %}
 
-<img src='{{ user.image_url }}'
-alt-text="{{user.first_name}} {{user.last_name}} profile picture">
+<img src='{{ image_url }}'
+alt="{{ first_name }} {{ last_name }} profile picture">
 
-<h1>{{ user.first_name }} {{ user.last_name }}</h1>
+<h1>{{ first_name }} {{ last_name }}</h1>
 
 <button class="edit_btn"
-onclick="location.href='/users/{{ user.id }}/edit'">Edit</button>
+onclick="location.href='/users/{{ user_id }}/edit'">Edit</button>
 
-<button class="delete_btn">Delete</button>
-
+<form method="POST" action="/users/{{ user_id }}/delete">
+<button type="submit" class="delete_btn">Delete</button>
+</form>
 {% endblock %}
