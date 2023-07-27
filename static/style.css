@@ -53,6 +53,12 @@ li:hover{
 }
 
 
+/* ------ ADD USER  PAGE ------ */
+
+.add_user_container{
+  margin: 20px;
+}
+
 /* ------ PROFILE PAGE ------ */
 
 .profile_container{
