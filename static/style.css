@@ -1,0 +1,139 @@
+body {
+  font-family: 'Inconsolata', monospace;
+  display: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+/* ------ USER LIST PAGE ------ */
+
+.blogly_title {
+  margin: 50px;
+  display: inline-block;
+}
+
+.blogly_title:hover {
+  transform: scale(1.2);
+  transform-origin: center;
+  transition: .4s;
+  color: blue;
+}
+
+.userlist_container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+}
+
+.add_user_button {
+  font-size: 1em;
+  padding: 10px;
+  margin-top: 20px;
+  margin-left: 120px;
+  align-self: flex-start;
+}
+
+li {
+  font-size: 1.4em;
+  margin-bottom: 8px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover,
+li:hover{
+  color: red;
+}
+
+
+/* ------ PROFILE PAGE ------ */
+
+.profile_container{
+  display: flex;
+  align-items: center;
+  border: 4px dashed black;
+  margin: 30px;
+  margin-right: 300px;
+  padding: 10px;
+}
+
+.profile_text_container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 20px;
+}
+
+.button_container{
+  display: flex;
+
+}
+
+.profile_image {
+  max-width: 200px;
+  max-height: 200px;
+  padding: 20px;
+
+}
+
+button {
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 1.3em;
+  cursor: pointer;
+  background-color: white;
+  font: black;
+  transition: transform .4s ease-in-out,
+  color 0.4s ease-in-out,
+  background-color 0.4s ease-in-out;
+  font-family: 'Inconsolata', monospace;
+}
+
+.edit_btn,
+.delete_btn {
+  padding: 6px 10px;
+  margin-right: 20px;
+  margin-left: 10px;
+  display: inline-block;
+  font-family: 'Inconsolata', monospace;
+}
+
+button:hover {
+  background-color: black;
+  color: white;
+  transform: scale(1.1);
+}
+
+img:hover {
+  transform: scale(1.1) rotate(2deg);
+  transition: .4s;
+}
+
+
+/* ------ PROFILE EDIT PAGE ------ */
+
+.edit_title {
+  margin: 30px;
+}
+
+#form_container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.edit_form {
+  font-size: 1.2em;
+}
+
+input {
+  font-family: 'Inconsolata', monospace;
+  font-size: 1em;
+}

@@ -1,16 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="profile_container">
+  <img src="{{ image_url }}" alt="{{ first_name }} {{ last_name }} profile picture" class="profile_image">
 
-<img src='{{ image_url }}'
-alt="{{ first_name }} {{ last_name }} profile picture">
+  <div class="profile_text_container">
+    <h1>{{ first_name }} {{ last_name }}</h1>
 
-<h1>{{ first_name }} {{ last_name }}</h1>
+    <div class="button_container">
+    <button class="edit_btn" onclick="location.href='/users/{{ user_id }}/edit'">Edit</button>
 
-<button class="edit_btn"
-onclick="location.href='/users/{{ user_id }}/edit'">Edit</button>
-
-<form method="POST" action="/users/{{ user_id }}/delete">
-<button type="submit" class="delete_btn">Delete</button>
-</form>
+    <form method="POST" action="/users/{{ user_id }}/delete">
+      <button type="submit" class="delete_btn">Delete</button>
+    </form>
+  </div>
+</div>
+</div>
 {% endblock %}

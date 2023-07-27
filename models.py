@@ -28,6 +28,6 @@ class User(db.Model):
     image_url = db.Column(
         db.String,
         nullable=False,
-        default='https://is3-ssl.mzstatic.com/image/thumb/Purple30/v4/89/a6/70/89a67093-f892-cdcd-00af-76d6a68c4ec0/source/256x256bb.jpg'
+        default='https://www.welcomewildlife.com/wp-content/uploads/2015/01/Raccoon-face.jpg'
     )
 
