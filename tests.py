@@ -62,3 +62,20 @@ class UserViewTestCase(TestCase):
             self.assertIn("test1_first", html)
             self.assertIn("test1_last", html)
 
+    def test_new_users_form(self):
+        """ """
+        with self.client as c:
+            resp = c.get('/users/new')
+            self.assertEqual(resp.status_code, 200)
+            html = resp.get_data(as_text=True)
+            self.assertIn('First Name', html)
+
+
+    def test_process_new_user(self):
+        """Tests for a redirect"""
+        with self.client as c:
+            resp = c.post('/users/new', data = {'first_name': 'test1_first',
+                                               'last_name': 'test1_last',
+                                               'image_url': None})
+            self.assertEqual(resp.status_code, 302)
+            self.assertEqual(resp.location, '/users')
