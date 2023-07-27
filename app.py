@@ -30,17 +30,18 @@ def home_page():
 
 
 @app.get('/users')
-def users():
+def display_user_list_page():
     """Renders user list page"""
     users = User.query.all()
 
-    return render_template('userlist.html', users = users)
+# CHANGE HTML PAGES TO INCLUDE UNDERSCORES
+    return render_template('user_list.html', users=users)
 
 
 @app.get('/users/new')
 def new_users_form():
     """Renders new user form"""
-    return render_template('newusersform.html')
+    return render_template('new_users_form.html')
 
 
 @app.post('/users/new')
@@ -54,9 +55,11 @@ def process_new_user():
     if image_url == '':
         image_url = None
 
-    new_user = User(first_name=first_name,
-                    last_name=last_name,
-                    image_url=image_url)
+    new_user = User(
+        first_name=first_name,
+        last_name=last_name,
+        image_url=image_url
+    )
 
     db.session.add(new_user)
     db.session.commit()
@@ -67,40 +70,29 @@ def process_new_user():
 @app.get('/users/<int:user_id>')
 def show_user_profile(user_id):
     """Collects user data and renders user profile page."""
-    user = User.query.get(user_id)
+    user = User.query.get_or_404(user_id)
 
-    first_name = user.first_name
-    last_name = user.last_name
-    image_url = user.image_url
-
-    return render_template('userprofile.html',
-                           first_name = first_name,
-                           user_id = user_id,
-                           last_name = last_name,
-                           image_url = image_url)
+    return render_template('user_profile.html',
+                           user=user,
+                           user_id=user_id)
 
 
 @app.get('/users/<int:user_id>/edit')
 def show_user_edit_page(user_id):
     """Collects user data and renders user profile edit page."""
-    user = User.query.get(user_id)
+    user = User.query.get_or_404(user_id)
 
-    first_name = user.first_name
-    last_name = user.last_name
-    image_url = user.image_url
 
-    return render_template('usereditpage.html',
-                           user_id = user_id,
-                           first_name = first_name,
-                           last_name = last_name,
-                           image_url = image_url)
+    return render_template('user_edit_page.html',
+                           user=user,
+                           user_id=user_id)
 
 
 @app.post('/users/<int:user_id>/edit')
 def process_user_edits(user_id):
     """Collect user edit form data and edit user instance in database,
     redirect to user list page."""
-    user = User.query.get(user_id)
+    user = User.query.get_or_404(user_id)
 
     first_name = request.form['firstname']
     last_name = request.form['lastname']

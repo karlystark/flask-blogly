@@ -1,6 +1,7 @@
 import os
 
-os.environ["DATABASE_URL"] = "postgresql:///blogly"
+os.environ["DATABASE_URL"] = "postgresql:///blogly_test"
+#createdb blogly_test and run from there
 
 from unittest import TestCase
 
@@ -68,8 +69,8 @@ class UserViewTestCase(TestCase):
         """Tests that new user form HTML appears on screen and status code is 200"""
         with self.client as c:
             resp = c.get('/users/new')
-            self.assertEqual(resp.status_code, 200)
             html = resp.get_data(as_text=True)
+            self.assertEqual(resp.status_code, 200)
             self.assertIn('First Name', html)
 
 
@@ -82,6 +83,7 @@ class UserViewTestCase(TestCase):
             self.assertEqual(resp.status_code, 302)
             self.assertEqual(resp.location, '/users')
 
+# make test making same post request and follow redirect, make sure new user appears in userlist
 
     def test_user_profile_page(self):
         """Tests that correct user profile is displayed on page"""
@@ -99,3 +101,5 @@ class UserViewTestCase(TestCase):
             html = resp.get_data(as_text=True)
             self.assertIn("test1_last", html)
             self.assertEqual(resp.status_code, 200)
+
+#add a test for the out of bounds bug once we fix it to prove that it's fixed

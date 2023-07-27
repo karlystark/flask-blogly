@@ -2,6 +2,8 @@
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
+#global variable to hold default image link
+
 def connect_db(app):
     """Connect to database."""
 
@@ -9,8 +11,10 @@ def connect_db(app):
     db.app = app
     db.init_app(app)
 
+
 class User(db.Model):
     __tablename__ = "user"
+    # make sure tablename is plural
 
     id = db.Column(
         db.Integer,
