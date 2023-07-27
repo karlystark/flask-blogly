@@ -1,11 +1,12 @@
 import os
 
-os.environ["DATABASE_URL"] = "postgresql:///blogly_test"
+os.environ["DATABASE_URL"] = "postgresql:///blogly"
 
 from unittest import TestCase
 
 from app import app, db
-from models import DEFAULT_IMAGE_URL, User
+from models import User
+
 
 # Make Flask errors be real errors, rather than HTML pages with error info
 app.config['TESTING'] = True
@@ -60,3 +61,4 @@ class UserViewTestCase(TestCase):
             html = resp.get_data(as_text=True)
             self.assertIn("test1_first", html)
             self.assertIn("test1_last", html)
+
