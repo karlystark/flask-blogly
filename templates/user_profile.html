@@ -17,9 +17,12 @@
 
   <ul>
     {% for post in posts %}
-      <li><a href="/posts/{{ post_id }}">{{ post_title }}</a></li>
+      <li><a href="/posts/{{ post.post_id }}">{{ post.title }}</a></li>
     {% endfor %}
   </ul>
+
+  <a href="/users/{{ user_id }}/posts/new" class="btn btn-primary" role="button"> Add Post</a>
+  </form>
 
 </div>
 </div>

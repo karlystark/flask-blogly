@@ -124,7 +124,7 @@ def delete_user_profile(user_id):
 
 @app.get('/users/<int:user_id>/posts/new')
 def show_add_new_post_form(user_id):
-    """Add new post for current user"""
+    """Displays add new post form for current user"""
 
     user = User.query.get_or_404(user_id)
 
@@ -134,8 +134,8 @@ def show_add_new_post_form(user_id):
 
 
 @app.post('/users/<int:user_id>/posts/new')
-def add_form_and_post_and_redirect(user_id):
-    """Display form and redirect on submission"""
+def add_post_and_redirect(user_id):
+    """Displays add post form and redirects to user profile on submission"""
 
     title = request.form['title']
     content = request.form['content']
@@ -145,20 +145,34 @@ def add_form_and_post_and_redirect(user_id):
     db.session.add(new_post)
     db.session.commit()
 
-    return redirect('/users/<int:user_id>')
+    return redirect(f'/users/{user_id}')
+
 
 @app.get('/posts/<int:post_id>')
 def display_post(post_id):
-    """Displays post submitted from the form"""
+    """Displays blog post submitted from the form"""
 
     post = Post.query.get_or_404(post_id)
+    user_id = post.user_id
+    user = User.query.get_or_404(user_id)
 
-    return render_template('display_posts.html', post=post)
+
+    return render_template('display_posts.html', post=post, user=user)
+
+
+@app.get('/posts/<int:post_id>/edit')
+def display_post_edit_page(post_id):
+    """Displays post edit form"""
+
+    post = Post.query.get_or_404(post_id)
+    user_id = post.user_id
+
+    return render_template('edit_post_form.html', post=post, user_id=user_id)
 
 
 @app.post('/posts/<int:post_id>/edit')
 def process_post_edits(post_id):
-    """Edits the post and updates the changes made"""
+    """Gets edits from post edit form and submits post edits to the database"""
 
     title = request.form['title']
     content = request.form['content']
@@ -170,7 +184,7 @@ def process_post_edits(post_id):
 
     db.session.commit()
 
-    return redirect('/posts/<int:post_id>')
+    return redirect(f'/posts/{post_id}')
 
 
 @app.post('/posts/<int:post_id>/delete')
@@ -179,8 +193,9 @@ def delete_user_post(post_id):
     current user profile"""
 
     post = Post.query.get_or_404(post_id)
+    user_id = post.user_id
 
     db.session.delete(post)
     db.session.commit()
 
-    return redirect('/users/<int:user_id>')
+    return redirect(f'/users/{user_id}')

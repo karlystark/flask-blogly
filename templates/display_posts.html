@@ -2,17 +2,17 @@
 
 {% block content %}
 
-<h1>{{post.title}}</h1>
+<h1>{{ post.title }}</h1>
 
-<p>{{post.content}}</p>
+<p>{{ post.content }}</p>
 
-<p>by {{user.first_name}} {{user.last_name}}</p>
+<p>by {{ user.first_name }} {{ user.last_name }}</p>
 
-<a href="/users/{{post.id}}" class="btn btn-primary" role="button">Cancel</a>
-<a href='/users/{{ post.id }}/edit' class="btn btn-primary" role="button">Edit</a>
+<a href="/users/{{ user.id }}" class="btn btn-primary" role="button">Cancel</a>
+<a href="/posts/{{ post.post_id }}/edit" class="btn btn-primary" role="button">Edit</a>
 
-<form method="POST" action="/users/{{ post.id }}/delete">
+<form method="POST" action="/posts/{{ post.post_id }}/delete">
   <button type="submit" class="delete_btn">Delete</button>
 </form>
 
-{% end block % }
+{% endblock %}

@@ -16,7 +16,7 @@ class User(db.Model):
     __tablename__ = "users"
     # make sure tablename is plural
 
-    posts = db.relationship('Post', backref = 'user')
+    posts = db.relationship('Post', backref='user')
 
     id = db.Column(
         db.Integer,
