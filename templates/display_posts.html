@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<div class="blogpost_container">
 <h1>{{ post.title }}</h1>
 
 <p>{{ post.content }}</p>
 
 <p>by {{ user.first_name }} {{ user.last_name }}</p>
 
-<a href="/users/{{ user.id }}" class="btn btn-primary" role="button">Cancel</a>
-<a href="/posts/{{ post.post_id }}/edit" class="btn btn-primary" role="button">Edit</a>
+<div class="buttons_container">
+<a href="/users/{{ user.id }}" class="btn btn-outline-dark" role="button">Cancel</a>
+<a href="/posts/{{ post.post_id }}/edit" class="btn btn-outline-dark" role="button">Edit</a>
 
 <form method="POST" action="/posts/{{ post.post_id }}/delete">
-  <button type="submit" class="delete_btn">Delete</button>
+  <button type="submit" class="delete_btn btn btn-outline-dark">Delete</button>
+</div>
 </form>
-
+</div>
 {% endblock %}

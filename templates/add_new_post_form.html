@@ -2,9 +2,10 @@
 
 {% block content %}
 <!-- test1_newpost -->
-
+<div class="form_container">
 <h1>Add post for {{user.first_name}} {{user.last_name}}</h1>
 
+<div class="blog_text"></div>
 <form action="/users/{{ user_id }}/posts/new" method="POST">
   <label for="title" id="">Title</label>
   <input type="text" name="title" id="title">
@@ -12,8 +13,10 @@
   <label for="content_box">Content</label>
   <textarea name="content" id="content_box" cols="50" rows="10"></textarea>
 
-  <a href="/users/{{ user_id }}" class="btn btn-primary" role="button">Cancel</a>
-  <button type="submit">Add</button>
+  <button type="submit" class="btn btn-outline-dark">Add</button>
+  <a href="/users/{{ user_id }}" class="btn btn-outline-dark" role="button">Cancel</a>
 
 </form>
+</div>
+</div>
 {% endblock %}

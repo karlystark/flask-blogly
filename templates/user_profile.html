@@ -8,20 +8,20 @@
     <h1>{{ user.first_name }} {{ user.last_name }}</h1>
 
     <div class="button_container">
-    <a href='/users/{{ user_id }}/edit' class="btn btn-primary" role="button">Edit</a>
+    <a href='/users/{{ user_id }}/edit' class="btn btn-outline-dark" role="button">Edit</a>
 
     <form method="POST" action="/users/{{ user_id }}/delete">
-      <button type="submit" class="delete_btn">Delete</button>
+      <button type="submit" class="delete_btn btn btn-outline-dark">Delete</button>
     </form>
   </div>
 
-  <ul>
+  <ul class="post_list">
     {% for post in posts %}
       <li><a href="/posts/{{ post.post_id }}">{{ post.title }}</a></li>
     {% endfor %}
   </ul>
 
-  <a href="/users/{{ user_id }}/posts/new" class="btn btn-primary" role="button"> Add Post</a>
+  <a href="/users/{{ user_id }}/posts/new" class="btn btn-outline-dark" role="button"> Add Post</a>
   </form>
 
 </div>

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="editpost_container">
 <h1>Edit Post</h1>
 
 <form action="/posts/{{ post.post_id }}/edit" method="POST">
@@ -8,11 +9,11 @@
   <input type="text" name="title" value="{{ post.title }}">
 
   <label for="content">Content</label>
-  <textarea name="content" id="" cols="50" rows="10"> {{ post.content }} </textarea>
+  <textarea name="content" id="content" cols="50" rows="10"> {{ post.content }} </textarea>
 
-  <a href="/users/{{ user_id }}" class="btn btn-primary" role="button">Cancel</a>
-  <button type="submit">Edit</button>
+  <a href="/users/{{ user_id }}" class="btn btn-outline-dark" role="button">Cancel</a>
+  <button type="submit" class="btn btn-outline-dark">Edit</button>
 
 </form>
-
+</div>
 {% endblock %}

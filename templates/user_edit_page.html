@@ -5,19 +5,19 @@
 
 <div id="form_container">
   <form action="/users/{{ user_id }}/edit" method="POST" class="edit_form">
-    <label for="">First Name</label>
-    <input type="text" name="firstname" value="{{ user.first_name }}">
+    <label for="first_name">First Name</label>
+    <input type="text" name="firstname" id="first_name" value="{{ user.first_name }}">
 
-    <label for="">Last Name</label>
-    <input type="text" name="lastname" value="{{ user.last_name }}">
+    <label for="last_name">Last Name</label>
+    <input type="text" name="lastname" id="last_name" value="{{ user.last_name }}">
 
-    <label for="">Image URL</label>
-    <input type="text" name="imageurl" value="{{ user.image_url }}">
+    <label for="image_url">Image URL</label>
+    <input type="text" name="imageurl" id="image_url" value="{{ user.image_url }}">
 
 
-    <button onclick="location.href='/users'">Cancel</button>
+    <a href='/users' class="btn btn-outline-dark">Cancel</a>
 
-    <button type="submit">Save</button>
+    <button type="submit" class="btn btn-outline-dark">Save</button>
   </form>
 </div>
 
