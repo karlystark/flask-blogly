@@ -6,7 +6,7 @@ os.environ["DATABASE_URL"] = "postgresql:///blogly_test"
 from unittest import TestCase
 
 from app import app, db
-from models import User
+from models import User, Post
 
 
 # Make Flask errors be real errors, rather than HTML pages with error info
@@ -42,7 +42,13 @@ class UserViewTestCase(TestCase):
             image_url=None,
         )
 
+        test_post = Post(
+            title='test1_post',
+            content='test1_content',
+        )
+
         db.session.add(test_user)
+        db.session.add(test_post)
         db.session.commit()
 
         # We can hold onto our test_user's id by attaching it to self (which is
@@ -50,6 +56,7 @@ class UserViewTestCase(TestCase):
         # rely on this user in our tests without needing to know the numeric
         # value of their id, since it will change each time our tests are run.
         self.user_id = test_user.id
+        self.post_id = test_post.post_id
 
     def tearDown(self):
         """Clean up any fouled transaction."""
@@ -103,3 +110,25 @@ class UserViewTestCase(TestCase):
             self.assertEqual(resp.status_code, 200)
 
 #add a test for the out of bounds bug once we fix it to prove that it's fixed
+
+    def test_user_profile_page(self):
+        """Tests that we are returned a 404 response, when user id doesn't exist"""
+        with self.client as c:
+            resp = c.get('/users/100')
+            self.assertEqual(resp.status_code, 404)
+
+    def test_show_add_new_post_form(self):
+        """Tests that correct post is being displayed on page"""
+        with self.client as c:
+            resp = c.get(f'/users/{self.user_id}/posts/new')
+            html = resp.get_data(as_text=True)
+            self.assertIn("test1_newpost", html)
+            self.assertEqual(resp.status_code, 200)
+
+
+    def test_process_post_edits(self):
+
+        with self.client as c:
+            resp = c.get(f'/posts/{self.post_id}/edit')
+            html = resp.get_data(as_text=True)
+            self.assertEqual(resp.status_code, 200)
